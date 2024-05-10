@@ -35,19 +35,14 @@ async def send_statistic_function_2(call: types.CallbackQuery, state: FSMContext
         try:
             l_student = json.loads(requests.get(
                 url=f"http://127.0.0.1:8000/lessons/lesson_student/{student['id']}/{lesson['id']}/").content)
-            # Agar o'quvchining bahosi 0 dan past bo'lsa, tekshirish
-            if l_student['evaluation'] <= 0:
-                # Agar shunday bo'lsa, o'quvchining ismiga oxirida probel qo'shing
-                d.update({student['name'] + ' ' + student['surname'] + ' ': l_student['evaluation']})
-            else:
-                d.update({student['name'] + ' ' + student['surname']: l_student['evaluation']})
+            d.update({student['name'] + ' ' + student['surname']: l_student['evaluation']})
         except Exception:
             pass
     date_object = datetime.datetime.strptime(lesson['created_at'], "%Y-%m-%dT%H:%M:%S.%f%z")
     year = date_object.year
     month = date_object.month
     day = date_object.day
-    create_statistic_image(data=d, chat_id=call.from_user.id, name=lesson['name'], date=f"{day}.{month}.{year}")
+    create_statistic_image(data=d, chat_id=call.from_user.id, name=f"{lesson['name']}", date=f"{day}.{month}.{year}")
     await call.message.delete()
     message = await call.message.answer_photo(photo=open(f"images/{call.from_user.id}.png", "rb"),
                                               caption=f"{group['group']['name']}ni {lesson['name']}dagi statistikasi",

@@ -8,8 +8,14 @@ def create_statistic_image(data: dict, chat_id: int, name=None, date=None):
     plt.figure(figsize=(10, 8))
     bars = plt.barh(names, values, color=colors)
     for i, bar in enumerate(bars):
-        plt.text(bar.get_width() - 5, bar.get_y() + bar.get_height() / 2,
-                 '%s, %d%%' % (names[i], int(bar.get_width())), ha='right', va='center', color='black')
+        if int(bar.get_width()) == 0:
+            alignment = 'left'
+            padding = 5
+        else:
+            alignment = 'right'
+            padding = -5
+        plt.text(bar.get_width() + padding, bar.get_y() + bar.get_height() / 2,
+                 '%s, %d%%' % (names[i], int(bar.get_width())), ha=alignment, va='center', color='black')
     plt.gca().invert_yaxis()
     plt.tick_params(labelleft=False, top=False)
     plt.xlim([0, 100])
