@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def create_statistic_image(data: dict, chat_id: int, name=None, date=None):
-    names = list(data.keys())
-    values = list(data.values())
+    df = pd.DataFrame(list(data.items()), columns=['names', 'values'])
+    df = df.sort_values('values', ascending=False)
+    names = df['names'].tolist()
+    values = df['values'].tolist()
     colors = plt.cm.tab20(range(len(names)))
     plt.figure(figsize=(10, 8))
     bars = plt.barh(names, values, color=colors)

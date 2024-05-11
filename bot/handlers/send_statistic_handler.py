@@ -42,7 +42,8 @@ async def send_statistic_function_2(call: types.CallbackQuery, state: FSMContext
     year = date_object.year
     month = date_object.month
     day = date_object.day
-    create_statistic_image(data=d, chat_id=call.from_user.id, name=f"{lesson['name']}", date=f"{day}.{month}.{year}")
+    create_statistic_image(data=d, chat_id=call.from_user.id, name=f"Infin {lesson['group']} - {lesson['name']}",
+                           date=f"{day}.{month}.{year}")
     await call.message.delete()
     message = await call.message.answer_photo(photo=open(f"images/{call.from_user.id}.png", "rb"),
                                               caption=f"{group['group']['name']}ni {lesson['name']}dagi statistikasi",
