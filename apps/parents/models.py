@@ -10,7 +10,7 @@ class Parents(models.Model):
     mother_surname = models.CharField(max_length=100)
     father_phone_number = models.CharField(max_length=13, unique=True)
     mother_phone_number = models.CharField(max_length=13, unique=True)
-    password = models.CharField(max_length=6)
+    # password = models.CharField(max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
