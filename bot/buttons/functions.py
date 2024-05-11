@@ -15,11 +15,10 @@ def create_statistic_image(data: dict, chat_id: int, name=None, date=None):
             alignment = 'right'
             padding = -5
         plt.text(bar.get_width() + padding, bar.get_y() + bar.get_height() / 2,
-                 '%s, %d%%' % (names[i], int(bar.get_width())), ha=alignment, va='center', color='black')
+                 '%s, %d%%' % (names[i], int(bar.get_width())), ha=alignment, va='center', color='black', fontsize=15)
     plt.gca().invert_yaxis()
     plt.tick_params(labelleft=False, top=False)
     plt.xlim([0, 100])
     if name and date:
         plt.title(f"{name} - {date}", fontsize="large", fontweight="bold", color="black")
     plt.savefig(f'images/{chat_id}.png')
-    return True

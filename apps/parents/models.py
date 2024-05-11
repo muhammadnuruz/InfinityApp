@@ -8,8 +8,6 @@ class Parents(models.Model):
     mother_name = models.CharField(max_length=100)
     father_surname = models.CharField(max_length=100)
     mother_surname = models.CharField(max_length=100)
-    father_birth_date = models.DateField()
-    mother_birth_date = models.DateField()
     father_phone_number = models.CharField(max_length=13, unique=True)
     mother_phone_number = models.CharField(max_length=13, unique=True)
     password = models.CharField(max_length=6)
