@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 
 def create_statistic_image(data: dict, chat_id: int, name=None, date=None):
@@ -7,7 +8,7 @@ def create_statistic_image(data: dict, chat_id: int, name=None, date=None):
     df = df.sort_values('values', ascending=False)
     names = df['names'].tolist()
     values = df['values'].tolist()
-    colors = plt.cm.tab20(range(len(names)))
+    colors = plt.cm.viridis_r(np.linspace(0, 1, len(names)))  # ranglarni yorqinligi bo'yicha tartiblash
     plt.figure(figsize=(10, 8))
     bars = plt.barh(names, values, color=colors)
     for i, bar in enumerate(bars):
