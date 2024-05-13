@@ -9,7 +9,6 @@ class Students(models.Model):
     password = models.CharField(max_length=6)
     chat_id = models.CharField(max_length=50, default=0)
     infin = models.IntegerField(default=0)
-    parent = models.ForeignKey("parents.Parents", on_delete=models.CASCADE, related_name='students', null=True)
     group = models.ForeignKey("groups.Groups", on_delete=models.CASCADE, related_name='students')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

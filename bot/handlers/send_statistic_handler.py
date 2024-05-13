@@ -46,14 +46,12 @@ async def send_statistic_function_2(call: types.CallbackQuery, state: FSMContext
                            date=f"{day}.{month}.{year}")
     await call.message.delete()
     message = await call.message.answer_photo(photo=open(f"images/{call.from_user.id}.png", "rb"),
-                                              caption=f"{group['group']['name']}ni {lesson['name']}dagi statistikasi",
                                               reply_markup=await admin_menu_buttons())
     await call.answer(text="Statistika o'quvchilarga yuborildi ✅", show_alert=True)
     for i in group['students_id']:
         try:
             student = json.loads(requests.get(url=f"http://127.0.0.1:8000/students/detail/{i}/").content)
             await bot.send_photo(chat_id=int(student['chat_id']), photo=open(f"images/{call.from_user.id}.png", "rb"),
-                                 caption=message.caption,
                                  reply_markup=message.reply_markup)
         except ChatNotFound:
             pass

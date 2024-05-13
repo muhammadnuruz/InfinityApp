@@ -6,7 +6,6 @@ urlpatterns = [
     path('teachers/', include("apps.teachers.urls")),
     path('students/', include("apps.students.urls")),
     path('lessons/', include("apps.lessons.urls")),
-    path('parents/', include("apps.parents.urls")),
     path('telegram-users/', include("apps.telegram_users.urls")),
     path('products/', include("apps.products.urls")),
 ]
