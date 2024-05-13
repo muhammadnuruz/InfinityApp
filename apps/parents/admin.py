@@ -13,4 +13,4 @@ class ParentsAdmin(admin.ModelAdmin):
     ordering = ('created_at',)
 
 
-admin.site.register(Parents, ParentsAdmin)
+# admin.site.register(Parents, ParentsAdmin)
