@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.groups',
     'apps.teachers',
     'apps.students',
+    'apps.parents',
     'apps.lessons',
     'apps.telegram_users',
     'apps.products'

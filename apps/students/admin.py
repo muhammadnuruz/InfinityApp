@@ -13,8 +13,8 @@ class StudentsAdminForm(ModelForm):
 class StudentsAdmin(admin.ModelAdmin):
     form = StudentsAdminForm
     list_display = (
-        'name', 'surname', 'phone_number', 'infin', 'group', 'parent', 'chat_id', 'created_at')
-    list_filter = ('group', 'parent', 'created_at')
+        'name', 'surname', 'phone_number', 'infin', 'group', 'chat_id', 'created_at')
+    list_filter = ('group', 'created_at')
     search_fields = ('name', 'surname', 'phone_number', 'chat_id')
 
 
