@@ -42,14 +42,14 @@ async def send_statistic_function_2(call: types.CallbackQuery, state: FSMContext
     year = date_object.year
     month = date_object.month
     day = date_object.day
-    create_statistic_image(data=d, chat_id=call.from_user.id, name=f"Infin {group['name']} - {lesson['name']}",
+    create_statistic_image(data=d, chat_id=call.from_user.id, name=f"Infin {group['group']['name']} - {lesson['name']}",
                            date=f"{day}.{month}.{year}")
     await call.message.delete()
-    message = await call.message.answer_photo(photo=open(f"images/{call.from_user.id}.png", "rb"),
+    await call.message.answer_photo(photo=open(f"images/{call.from_user.id}.png", "rb"),
                                               reply_markup=await admin_menu_buttons())
     await call.answer(text="Statistika o'quvchilarga va guruhga yuborildi ✅", show_alert=True)
     try:
-        await bot.send_photo(chat_id=int(group['group_id']), photo=open(f"images/{call.from_user.id}.png", "rb"))
+        await bot.send_photo(chat_id=int(group['group']['group_id']), photo=open(f"images/{call.from_user.id}.png", "rb"))
     except Exception:
         pass
     for i in group['students_id']:
