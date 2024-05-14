@@ -13,7 +13,6 @@ class StudentsRetrieveSerializer(serializers.ModelSerializer):
             "phone_number",
             "infin",
             "group",
-            "parent",
             'chat_id',
             'password',
             "created_at",
