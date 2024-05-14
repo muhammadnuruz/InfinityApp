@@ -22,7 +22,6 @@ class LessonsDetail(RetrieveAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         attended_students = instance.participated_students.all()
-        absent_students = instance.absent_students.all()
         serializer_data = serializer.data
         serializer_data['attended_students'] = [student.id for student in attended_students]
         return Response(serializer_data)
