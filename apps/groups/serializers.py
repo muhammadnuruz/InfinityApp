@@ -5,10 +5,10 @@ from rest_framework import serializers
 class GroupsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Groups
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'group_id']
 
 
 class GroupsRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Groups
-        fields = ['id', 'name', 'created_at']
+        fields = ['id', 'name', 'group_id', 'created_at']

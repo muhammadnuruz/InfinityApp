@@ -5,6 +5,7 @@ from apps.students.models import Students
 
 class Groups(models.Model):
     name = models.CharField(max_length=255, unique=True)
+    group_id = models.CharField(max_length=50, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

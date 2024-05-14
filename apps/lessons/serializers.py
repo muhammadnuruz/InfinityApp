@@ -11,4 +11,4 @@ class LessonsSerializer(serializers.ModelSerializer):
 class ParticipatedStudentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParticipatedStudents
-        fields = ['id', 'student', 'evaluation', 'is_do_homework', 'infin']
+        fields = ['id', 'student', 'evaluation', 'infin']

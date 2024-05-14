@@ -35,7 +35,6 @@ class ParticipatedStudents(models.Model):
     lesson = models.ForeignKey(Lessons, on_delete=models.CASCADE, related_name='participated_students')
     student = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='participated_students')
     evaluation = models.IntegerField(default=0)
-    is_do_homework = models.BooleanField(default=False)
     infin = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -51,18 +50,3 @@ class ParticipatedStudents(models.Model):
         self.student.infin += self.infin
         self.student.save()
         super().save(*args, **kwargs)
-
-
-class AbsentStudents(models.Model):
-    lesson = models.ForeignKey(Lessons, on_delete=models.CASCADE, related_name='absent_students')
-    student = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='absent_students')
-    is_reason = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = "Absent Student"
-        verbose_name_plural = "Absent Students"
-
-    def __str__(self):
-        return f"{self.student}-{self.lesson}"
