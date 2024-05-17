@@ -2,8 +2,11 @@ from rest_framework.exceptions import NotFound
 from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
-from apps.lessons.serializers import LessonsSerializer, ParticipatedStudentsSerializer
+from django.db.models import Avg
+from datetime import datetime
+from django.utils.timezone import make_aware
+from apps.lessons.serializers import LessonsSerializer, ParticipatedStudentsSerializer, \
+    AggregatedParticipatedStudentSerializer
 from apps.lessons.models import Lessons, ParticipatedStudents
 
 
@@ -54,3 +57,15 @@ class LessonStudentAPIView(RetrieveAPIView):
             raise NotFound()
         serializer = self.serializer_class(queryset)
         return Response(serializer.data)
+
+
+class MonthStatisticView(ListAPIView):
+    serializer_class = AggregatedParticipatedStudentSerializer
+
+    def get_queryset(self):
+        group_id = self.kwargs['group_id']
+        now = datetime.now()
+        start_of_month = make_aware(datetime(now.year, now.month, 1))
+        lessons = Lessons.objects.filter(group_id=group_id, created_at__gte=start_of_month)
+        return ParticipatedStudents.objects.filter(lesson__in=lessons).values('student_id').annotate(
+            average_evaluation=Avg('evaluation')).order_by('student_id')

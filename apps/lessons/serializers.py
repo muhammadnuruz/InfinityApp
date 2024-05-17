@@ -12,3 +12,8 @@ class ParticipatedStudentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParticipatedStudents
         fields = ['id', 'student', 'evaluation', 'infin', 'created_at']
+
+
+class AggregatedParticipatedStudentSerializer(serializers.Serializer):
+    student_id = serializers.IntegerField()
+    average_evaluation = serializers.IntegerField()
