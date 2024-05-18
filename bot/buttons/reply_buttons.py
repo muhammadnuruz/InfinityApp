@@ -6,7 +6,7 @@ from aiogram.types import ReplyKeyboardMarkup
 from bot.buttons.text import back_main_menu, adverts, none_advert, forward_advert, sign_in, sign_up, account, log_out, \
     back_admin_menu, statistic, send_statistic, shop, account_ru, \
     statistic_ru, shop_ru, log_out_ru, sign_up_ru, sign_in_ru, back_main_menu_ru, choice_language, \
-    choice_language_ru
+    choice_language_ru, month_statistic
 
 
 async def main_menu_buttons(chat_id: int):
@@ -56,6 +56,7 @@ async def back_admin_menu_button():
 async def admin_menu_buttons():
     design = [
         [adverts, send_statistic],
+        [month_statistic],
         [back_main_menu]
     ]
     return ReplyKeyboardMarkup(keyboard=design, resize_keyboard=True)

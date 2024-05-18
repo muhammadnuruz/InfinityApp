@@ -15,5 +15,7 @@ class ParticipatedStudentsSerializer(serializers.ModelSerializer):
 
 
 class AggregatedParticipatedStudentSerializer(serializers.Serializer):
+    student_name = serializers.CharField(max_length=100)
+    student_surname = serializers.CharField(max_length=100)
     student_id = serializers.IntegerField()
     average_evaluation = serializers.IntegerField()

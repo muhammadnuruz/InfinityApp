@@ -38,3 +38,11 @@ async def language_buttons():
          InlineKeyboardButton(text=ru_language, callback_data='language_ru')]
     ]
     return InlineKeyboardMarkup(inline_keyboard=design)
+
+
+async def month_statistic_buttons():
+    lessons = json.loads(requests.get(url=f"http://127.0.0.1:8000/groups/").content)
+    design = []
+    for i in lessons['results']:
+        design.append([InlineKeyboardButton(text=i['name'], callback_data=i['id'])])
+    return InlineKeyboardMarkup(inline_keyboard=design)

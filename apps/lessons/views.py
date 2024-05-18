@@ -2,7 +2,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from django.db.models import Avg
+from django.db.models import Avg, F
 from datetime import datetime, timedelta
 from django.utils.timezone import make_aware
 from apps.lessons.serializers import LessonsSerializer, ParticipatedStudentsSerializer, \
@@ -71,5 +71,10 @@ class MonthStatisticView(ListAPIView):
             datetime(last_day_of_previous_month.year, last_day_of_previous_month.month, 1))
         lessons = Lessons.objects.filter(group_id=group_id, created_at__gte=first_day_of_previous_month,
                                          created_at__lt=first_day_of_current_month)
-        return ParticipatedStudents.objects.filter(lesson__in=lessons).values('student_id').annotate(
-            average_evaluation=Avg('evaluation')).order_by('student_id')
+        return ParticipatedStudents.objects.filter(lesson__in=lessons).values(
+            'student_id',
+            student_name=F('student__name'),   # Rename field to match serializer
+            student_surname=F('student__surname') # Rename field to match serializer
+        ).annotate(
+            average_evaluation=Avg('evaluation')
+        ).order_by('student_id')

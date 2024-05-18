@@ -8,7 +8,7 @@ from bot.dispatcher import dp
 from main import admins
 
 
-@dp.message_handler(Text(back_admin_menu), state=['advert', 'send_forward', 'send_statistic_1'])
+@dp.message_handler(Text(back_admin_menu), state=['advert', 'send_forward', 'send_statistic_1', 'month_statistic_1'])
 async def back_main_menu_function_1(msg: types.Message, state: FSMContext):
     await msg.answer(text=f"Admin menu 👤", reply_markup=await admin_menu_buttons())
     await state.finish()
