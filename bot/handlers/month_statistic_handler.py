@@ -55,7 +55,7 @@ Qaysi guruhni 1 oylik statistikasini olmoxchisiz ❓""", reply_markup=await mont
         group = json.loads(requests.get(url=f"http://127.0.0.1:8000/groups/{call.data}/").content)
         d = {}
         for i in month_lessons['results']:
-            d.update({i['name'] + ' ' + i['surname']: i['average_evaluation']})
+            d.update({i['student_name'] + ' ' + i['student_surname']: i['average_evaluation']})
         date_object = datetime.datetime.now()
         year = date_object.year
         month = date_object.month
