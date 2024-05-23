@@ -65,12 +65,16 @@ class MonthStatisticView(ListAPIView):
     def get_queryset(self):
         group_id = self.kwargs['group_id']
         now = datetime.now()
-        start_of_month = make_aware(datetime(now.year, now.month, 1))
-        lessons = Lessons.objects.filter(group_id=group_id, created_at__gte=start_of_month)
+        first_day_of_current_month = make_aware(datetime(now.year, now.month, 1))
+        last_day_of_previous_month = first_day_of_current_month - timedelta(days=1)
+        first_day_of_previous_month = make_aware(
+            datetime(last_day_of_previous_month.year, last_day_of_previous_month.month, 1))
+        lessons = Lessons.objects.filter(group_id=group_id, created_at__gte=first_day_of_previous_month,
+                                         created_at__lt=first_day_of_current_month)
         return ParticipatedStudents.objects.filter(lesson__in=lessons).values(
             'student_id',
-            student_name=F('student__name'),  # Rename field to match serializer
-            student_surname=F('student__surname')  # Rename field to match serializer
+            student_name=F('student__name'),   # Rename field to match serializer
+            student_surname=F('student__surname') # Rename field to match serializer
         ).annotate(
             average_evaluation=Avg('evaluation')
         ).order_by('student_id')
