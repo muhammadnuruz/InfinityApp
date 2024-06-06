@@ -54,7 +54,7 @@ async def back_main_menu_function_1(msg: types.Message, state: FSMContext):
         if msg.text == back_main_menu:
             await msg.answer(text=f"Asosiy menu🏠", reply_markup=await main_menu_buttons(msg.from_user.id))
         else:
-            await msg.answer(text=f"Главное меню🏠", reply_markup=await start_menu_buttons(msg.from_user.id))
+            await msg.answer(text=f"Главное меню🏠", reply_markup=await main_menu_buttons(msg.from_user.id))
         await state.finish()
 
 
